@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -11,8 +10,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText,
 } from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 export const MyNavbar = ({loggedInUser,setLoggedInUser}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,72 +21,80 @@ export const MyNavbar = ({loggedInUser,setLoggedInUser}) => {
   return (
     <div>
       <Navbar expand="sm" dark color="dark" fixed="top">
-        <NavbarBrand href="/">🍀</NavbarBrand>
+        <NavbarBrand href="/">🐭</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
             <NavItem>
-              <NavLink to="/" className="nav-link" aria-current="page" href="#">
+              <NavLink to="/" className="nav-link" aria-current="page">
                 Home
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/about" className="nav-link" href="#">
+              <NavLink to="about" className="nav-link">
                 About
               </NavLink>
             </NavItem>
-
             <NavItem>
-              <NavLink to="/contact" className="nav-link" href="#">
+              <NavLink to="contact" className="nav-link">
                 Contact
               </NavLink>
             </NavItem>
-
             <NavItem>
-              <NavLink to="/products" className="nav-link " href="#">
+              <NavLink to="products" className="nav-link">
                 Products
               </NavLink>
             </NavItem>
-
+            {loggedInUser?.role == 'admin' &&
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Options
+                Admin felület
               </DropdownToggle>
               <DropdownMenu end>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
+                <DropdownItem>Felhasználók</DropdownItem>
+                <DropdownItem>Árúkészlet</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
+                <DropdownItem>
+                <NavLink to="books" className="">
+                Books
+              </NavLink>
+
+
+                </DropdownItem>
               </DropdownMenu>
-            </UncontrolledDropdown>
+            </UncontrolledDropdown> }
           </Nav>
-{loggedInUser?   
-(  <Nav navbar>
-            <NavItem>
-              <NavItem to="login" className="btn nav-link d-flex flex-column align-items-center ">
-                <img src="asd1.png" alt="avatar" style={{width:"20px"}} />
-                {loggedInUser}
+          {loggedInUser?.username ?
+          (
+            <Nav navbar>
+              <NavItem className="nav-link d-flex align-items-center">
+              <NavLink to="userProfile" className="nav-link">
+                  <img style={{width:"20px",marginRight:"10px"}} src={loggedInUser.avatar} alt="Avatar" />
+                  <span style={{cursor:"pointer"}}>{loggedInUser.username}</span>
+              </NavLink>
               </NavItem>
-            </NavItem>
+  
+              <NavItem className="d-flex align-items-center">
+                <NavLink to="/login">
+                  <span className="btn text-info" onClick={()=>setLoggedInUser({})}>Logout</span>
+                </NavLink> 
+              </NavItem>
+            </Nav>)
+          : 
+          (
+          <Nav navbar>
             <NavItem>
-              <span className="btn text-info"   onClick={()=>setLoggedInUser('')}>Logout</span>
-            </NavItem>
-          </Nav>)
-:
-(
-  <Nav navbar>
-  <NavItem>
-              <NavLink to="login" className="nav-link " href="#">
-                LogIn
+              <NavLink to="login" className="nav-link">
+                Login
               </NavLink>
             </NavItem>
+
             <NavItem>
-              <NavLink to="register" className="nav-link" href="#">
+              <NavLink to="register" className="nav-link">
                 Register
               </NavLink>
             </NavItem>
           </Nav>)
-      
 }
         </Collapse>
       </Navbar>

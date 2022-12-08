@@ -15,7 +15,6 @@ export const Login = ({setLoggedInUser}) => {
 
     const mutationCheckUsername=useMutation(checkUsername,{
       onSuccess:(data)=>{
-        console.log('szerver oldalrol',data.data.rowCount,data.data.username)
         if(data.data.rowCount ==  0)
          setIsValidU(false)
         else
@@ -42,12 +41,13 @@ export const Login = ({setLoggedInUser}) => {
 
     const mutationLogin=useMutation(login,{
       onSuccess:(data)=>{
-        console.log(data)
-        if(data.data.rowCount ==0)
+       // console.log('mutation login:',data.data)
+        if(data.data?.error)
         setIsValidP(false)
         else {
         setIsValidP(true)
-        setLoggedInUser(data.data.username)
+        const {username,email,avatar,avatar_id,id,role} = data.data
+        setLoggedInUser({username:username,email:email,avatar:avatar,avatar_id:avatar_id,id:id,role:role})
         navigate('/')}
 
         

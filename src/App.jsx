@@ -13,12 +13,15 @@ import {Login} from './components/Login';
 import {Register} from './components/Register';
 import {QueryClient,QueryClientProvider} from 'react-query';
 import { useState } from 'react';
+import {UserProfile} from './components/UserProfile';
+import {Books} from './components/Books';
 
 
 const queryClient = new QueryClient()
 
 function App() {
-  const [loggedInUser, setLoggedInUser] =useState('')
+  const [loggedInUser, setLoggedInUser] =useState({})
+  console.log('LoggedInUser:',loggedInUser)
 
 
   return (
@@ -26,13 +29,18 @@ function App() {
       <MyNavbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}  />
       <div className="holder d-flex justify-content-center">
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/products" element={<Products />} />
-      <Route path="/products/:id" element={<Product />} />
-      <Route path="/login" element={<Login setLoggedInUser={setLoggedInUser}/>} />
-      <Route path="/register" element={<Register />} />
+      <Route path="" element={<Home />} />
+      <Route path="about" element={<About />} />
+      <Route path="contact" element={<Contact />} />
+      <Route path="products" element={<Products />} />
+      <Route path="products:id" element={<Product />} />
+      <Route path="login" element={<Login setLoggedInUser={setLoggedInUser}/>} />
+      <Route path="register" element={<Register />} />
+      {loggedInUser?.username && 
+      <Route path="userProfile" element={<UserProfile  loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}   />} />}
+    {loggedInUser?.role=='admin' &&
+     <Route path="books" element={<Books/>}/>}
+
 
     </Routes>
     </div>

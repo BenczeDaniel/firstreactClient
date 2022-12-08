@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import {MyImg} from './MyImg';
+import {motion} from 'framer-motion'
 
 export const Product=()=> {
 const params=useParams()
@@ -17,6 +18,13 @@ console.log(selProduct)
 
 
   return (
+    <motion.div initial={{x:'100vw'}}
+    animate={{x:0}}
+    transition={{delay:0.2,type:"spring",stiffness:40}}>
+
+   
+
+
     
  <Card style={{ width: '18rem' }}>
       <MyImg  selProduct={selProduct} /> 
@@ -30,7 +38,7 @@ console.log(selProduct)
       </Card.Body>
     </Card>
 
-        
+   </motion.div>
     
-  )
+  ) 
 }

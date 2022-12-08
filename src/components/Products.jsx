@@ -2,6 +2,7 @@ import React from 'react'
 import {data} from '../data.js'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {motion} from 'framer-motion'
 
 
 
@@ -15,12 +16,12 @@ export const  Products=()=> {
        
        <ul className='list-group'>
         {items.map(obj=>
-         <li className='list-group-item btn btn-dark'
+         <motion.li className='list-group-item btn btn-dark' whileHover={{scale:1.3,color:'lime'}}
           key={obj.id}
           onClick={()=>navigate('/products/'+obj.id)}
           >
           {obj.name}
-          </li>
+          </motion.li>
        )}
        </ul>
         

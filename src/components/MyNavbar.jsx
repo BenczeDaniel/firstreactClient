@@ -2,100 +2,56 @@ import React, { useState } from "react";
 import {
   Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
+  
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
-export const MyNavbar = ({loggedInUser,setLoggedInUser}) => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+document.body.style.backgroundImage = "url('DND.jpg')";
 
+export const MyNavbar = () => {
+  
   return (
-    <div>
+    <div >
       <Navbar expand="sm" dark color="dark" fixed="top">
-        <NavbarBrand href="/">🐭</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+        <NavbarBrand href=""></NavbarBrand>
+       
+        <Collapse navbar>
           <Nav className="me-auto" navbar>
             <NavItem>
               <NavLink to="/" className="nav-link" aria-current="page">
-                Home
+                Kezdolap
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink to="about" className="nav-link">
-                About
+                Árak
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink to="contact" className="nav-link">
-                Contact
+                Kapcsolat
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink to="products" className="nav-link">
-                Products
-              </NavLink>
-            </NavItem>
-            {loggedInUser?.role == 'admin' &&
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Admin felület
-              </DropdownToggle>
-              <DropdownMenu end>
-                <DropdownItem>Felhasználók</DropdownItem>
-                <DropdownItem>Árúkészlet</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                <NavLink to="books" className="">
-                Books
-              </NavLink>
 
-
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown> }
           </Nav>
-          {loggedInUser?.username ?
-          (
-            <Nav navbar>
-              <NavItem className="nav-link d-flex align-items-center">
-              <NavLink to="userProfile" className="nav-link">
-                  <img style={{width:"20px",marginRight:"10px"}} src={loggedInUser.avatar} alt="Avatar" />
-                  <span style={{cursor:"pointer"}}>{loggedInUser.username}</span>
-              </NavLink>
-              </NavItem>
-  
-              <NavItem className="d-flex align-items-center">
-                <NavLink to="/login">
-                  <span className="btn text-info" onClick={()=>setLoggedInUser({})}>Logout</span>
-                </NavLink> 
-              </NavItem>
-            </Nav>)
-          : 
-          (
+          
           <Nav navbar>
             <NavItem>
               <NavLink to="login" className="nav-link">
-                Login
+                Bejelentkezés
               </NavLink>
             </NavItem>
 
             <NavItem>
               <NavLink to="register" className="nav-link">
-                Register
+                Regisztráció
               </NavLink>
             </NavItem>
-          </Nav>)
-}
+          </Nav>
         </Collapse>
       </Navbar>
     </div>
